@@ -1,13 +1,272 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap');
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+:root {
+  --dark-theme-dark-blue: hsl(209, 23%, 22%);
+  --dark-theme-bg-dark-blue: hsl(207, 26%, 17%);
+  --dark-theme-box-shadow: rgba(245, 245, 245, 0.2) 0 0 8px
+
+  --light-theme-txt-dark-blue: hsl(200, 15%, 8%);
+  --light-theme-input-mid-gray: hsl(0, 0%, 52%);
+  --light-theme-bg-light-gray: hsl(0, 0%, 96%);
+
+  --both-white: hsl(0, 0%, 100%);
+}
+
+body {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  overflow-x: hidden;
+}
+header {
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  display: block;
+}
+svg {
+  width: 1rem;
+  height: 1rem;
+  display: block;
+}
+
+button {
+  padding: 0.5rem 1.5rem;
+  border-radius: 20px;
+  border: solid black 1px;
+}
+
+footer {
+  position: relative;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 3rem;
+}
+
+body[data-theme='dark'] {
+  background-color: var(--dark-theme-bg-dark-blue);
+  color: var(--both-white);
+}
+
+body[data-theme='dark'] input,
+body[data-theme='dark'] select,
+body[data-theme='dark'] button {
+  background-color: var(--dark-theme-dark-blue);
+  color: var(--both-white);
+  border: 1px solid rgb(94, 94, 94);
+  box-shadow: var(--dark-theme-box-shadow);
+}
+body[data-theme='dark'] input::placeholder {
+  color: var(--both-white);
+}
+
+body[data-theme='dark'] .borders span {
+  background-color: var(--dark-theme-bg-dark-blue);
+  box-shadow: var(--dark-theme-box-shadow);
+}
+
+body[data-theme='dark'] .countryCard {
+  box-shadow: var(--dark-theme-box-shadow);
+  background-color: var(--dark-theme-dark-blue);
+}
+
+body[data-theme='dark'] .navbar {
+  background-color: var(--dark-theme-dark-blue);
+}
+body[data-theme='dark'] .details-content {
+  background-color: var(--dark-theme-dark-blue);
+}
+body[data-theme='dark'] a {
+  color: var(--both-white);
+}
+
+
+/* light */
+body[data-theme='light'] {
+  color: var(--light-theme-txt-dark-blue);
+  background-color: var(--light-theme-bg-light-gray);
+}
+
+body[data-theme='light'] .borders span {
+  background-color: var(--light-theme-bg-light-gray);
+}
+body[data-theme='light'] a {
+  color: var(--light-theme-txt-dark-blue);
+}
+body[data-theme='light'] .details-content {
+  background-color: var(--both-white);
+}
+
+body[data-theme='light'] .countryCard {
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+body[data-theme='light'] .navbar {
+  background-color: var(--both-white);
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 3rem;
+}
+
+.container {
+  min-height: 75vh;
+  margin: 1rem auto;
+  width: min(90%, 75.5rem);
+}
+
+.allCountriesList {
+  display: grid;
+  place-items: center;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.countryCard {
+  width: 270px;
+  height: 300px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.countryCard img {
+  width: 100%;
+  height: 150px;
+}
+
+.countryCard-content {
+  padding: 1rem;
+}
+
+.controllers {
+  display: flex;
+  flex-direction: column;
+  margin-block: 2rem;
+}
+
+.search {
+  height: 2rem;
+  margin-bottom: 1rem;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  min-height: 70vh;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem;
+}
+
+.details-content {
+  display: flex;
+  flex-direction: column;
+  line-height: 25px;
+  min-width: 350px;
+  max-width: 500px;
+  border-radius: 20px;
+  background-color: var(--both-white);
+  padding: 1rem;
+}
+
+.details-content-flex {
+  display: flex;
+  flex-direction: column;
+  margin-block: 1rem;
+}
+
+.details-img {
+  align-self: center;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  margin-bottom: 1rem; 
+}
+
+.details-img img {
+  width: 100%;
+  height: 100%;
+}
+
+.borders {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+}
+.borders span {
+  padding: 0.5rem;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.countryCard:hover,
+.countryCard:focus,
+svg:hover,
+svg:focus,
+button:hover,
+button:focus-visible,
+.borders span:hover,
+.borders span:focus {
+  transform: scale(1.1);
+}
+
+@media (min-width: 420px) {
+  .details-content-flex {
+    flex-direction: row;
+    gap: 3rem;
+  }
+  .details-img {
+    align-self: center;
+  }
+  .controllers {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .search {
+    margin-bottom: 0;
+  }
+}
+
+@media (min-width: 890px) {
+  .details {
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 3rem;
+  }
+}
+
+@media (min-width: 630px) {
+  .allCountriesList {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .allCountriesList {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1300px) {
+  .allCountriesList {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
