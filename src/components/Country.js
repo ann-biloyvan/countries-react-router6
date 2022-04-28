@@ -5,8 +5,6 @@ import { useNavigate } from 'react-router-dom';
 export default function Country({ countries }) {
   const navigate = useNavigate();
 
-  console.log(countries);
-
   return (
     <>
       {countries.map((country) => (

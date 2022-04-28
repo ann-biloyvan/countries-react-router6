@@ -6,15 +6,25 @@ import AllCountries from '../components/AllCountries';
 import Search from '../components/Search';
 import Filter from '../components/Filter';
 import { ALL_COUNTRIES } from '../reqConfig';
+import Spinner from '../components/Spinner';
 
 export default function HomePage() {
   const [countries, setCountries] = useState([]);
   const [query, setQuery] = useState('');
   const [filteredCountries, setFilteredCountries] = useState(countries);
   const [option, setOption] = useState('');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get(ALL_COUNTRIES).then(({ data }) => setCountries(data));
+    async function fe() {
+      try {
+        await axios.get(ALL_COUNTRIES).then(({ data }) => setCountries(data));
+        setLoading(false);
+      } catch (e) {
+        setLoading(false);
+      }
+    }
+    fe();
   }, []);
 
   const regions = [...new Set(countries.map((country) => country.region))];
@@ -39,10 +49,13 @@ export default function HomePage() {
         <Filter onChange={(e) => setOption(e.target.value)} options={regions} />
       </div>
 
-      {!filteredCountries.length ? (
-        <h1>No countries found</h1>
-      ) : (
+      {filteredCountries.length ? (
         <AllCountries countries={filteredCountries} />
+      ) : (
+        loading && <Spinner />
+      )}
+      {!filteredCountries.length && !loading && (
+        <h1 style={{ marginTop: '2rem' }}>No matches found</h1>
       )}
     </>
   );
